@@ -11,66 +11,45 @@ public class ResultForm : Form
         AutoScaleMode = AutoScaleMode.Dpi;
 
         Text = "Итоги викторины";
-        ClientSize = new Size(560, 400);
+        ClientSize = new Size(400, 210);
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;
-        BackColor = Theme.Background;
-        Font = Theme.NormalFont;
 
         var (title, comment) = GetRank(session.Mistakes);
 
-        var congratsLabel = new Label
+        var resultLabel = new Label
         {
-            Text = $"Поздравляем, {session.PlayerName}!",
-            Font = Theme.TitleFont,
-            ForeColor = Theme.Accent,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point(20, 25),
-            Size = new Size(520, 45),
+            Text = $"Поздравляем, {session.PlayerName}!\n\n" +
+                   $"Ты ответил(а) на все {session.TotalQuestions} вопросов.\n" +
+                   $"Неправильных попыток: {session.Mistakes}\n\n" +
+                   $"Твоё звание: «{title}»\n" +
+                   comment,
+            Location = new Point(20, 15),
+            Size = new Size(360, 125),
         };
 
-        var statsLabel = new Label
+        var againButton = new Button
         {
-            Text = $"Ты ответил(а) на все {session.TotalQuestions} вопросов.\n" +
-                   $"Неправильных попыток: {session.Mistakes}",
-            ForeColor = Theme.Text,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point(20, 85),
-            Size = new Size(520, 55),
+            Text = "Сыграть ещё раз",
+            Location = new Point(20, 160),
+            Size = new Size(120, 30),
         };
-
-        var rankLabel = new Label
-        {
-            Text = $"Твоё звание: «{title}»",
-            Font = Theme.HeaderFont,
-            ForeColor = Theme.Success,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point(20, 155),
-            Size = new Size(520, 40),
-        };
-
-        var commentLabel = new Label
-        {
-            Text = comment,
-            ForeColor = Theme.Text,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point(20, 200),
-            Size = new Size(520, 70),
-        };
-
-        var againButton = Theme.CreateButton("Сыграть ещё раз", new Point(95, 300), new Size(180, 45));
         againButton.Click += (_, _) =>
         {
             PlayAgain = true;
             Close();
         };
 
-        var exitButton = Theme.CreateButton("Выход", new Point(285, 300), new Size(180, 45));
-        exitButton.BackColor = Theme.Muted;
+        var exitButton = new Button
+        {
+            Text = "Выход",
+            Location = new Point(260, 160),
+            Size = new Size(120, 30),
+        };
         exitButton.Click += (_, _) => Application.Exit();
 
         AcceptButton = againButton;
-        Controls.AddRange(new Control[] { congratsLabel, statsLabel, rankLabel, commentLabel, againButton, exitButton });
+        Controls.AddRange(new Control[] { resultLabel, againButton, exitButton });
         ResumeLayout(false);
     }
 

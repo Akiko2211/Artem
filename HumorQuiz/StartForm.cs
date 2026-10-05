@@ -11,64 +11,51 @@ public class StartForm : Form
         AutoScaleMode = AutoScaleMode.Dpi;
 
         Text = "Юмористическая викторина";
-        ClientSize = new Size(520, 360);
+        ClientSize = new Size(400, 210);
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;
         StartPosition = FormStartPosition.CenterScreen;
-        BackColor = Theme.Background;
-        Font = Theme.NormalFont;
-
-        var titleLabel = new Label
-        {
-            Text = "Викторина «Смех да и только»",
-            Font = Theme.TitleFont,
-            ForeColor = Theme.Accent,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Location = new Point(20, 25),
-            Size = new Size(480, 40),
-        };
 
         var rulesLabel = new Label
         {
-            Text = "Тебя ждут 15 лёгких вопросов с подвохом.\n" +
-                   "Ошибёшься — придётся отвечать заново, пока не угадаешь.\n" +
-                   "Думай головой, а не клавиатурой!",
-            TextAlign = ContentAlignment.MiddleCenter,
-            ForeColor = Theme.Text,
-            Location = new Point(20, 80),
-            Size = new Size(480, 80),
+            Text = "Викторина из 15 вопросов с подвохом.\n" +
+                   "Если ошибёшься — придётся отвечать заново.",
+            Location = new Point(20, 15),
+            Size = new Size(360, 40),
         };
 
         var nameLabel = new Label
         {
             Text = "Как тебя зовут?",
-            ForeColor = Theme.Text,
-            Location = new Point(110, 180),
+            Location = new Point(20, 70),
             AutoSize = true,
         };
 
         _nameTextBox = new TextBox
         {
-            Location = new Point(110, 205),
-            Size = new Size(300, 30),
+            Location = new Point(20, 92),
+            Size = new Size(360, 23),
             MaxLength = 30,
-            PlaceholderText = "Например, Капитан Очевидность",
         };
 
-        var startButton = Theme.CreateButton("Начать викторину", new Point(160, 255), new Size(200, 45));
+        var startButton = new Button
+        {
+            Text = "Начать",
+            Location = new Point(20, 150),
+            Size = new Size(120, 30),
+        };
         startButton.Click += (_, _) => StartQuiz();
 
-        var exitButton = new LinkLabel
+        var exitButton = new Button
         {
             Text = "Выход",
-            LinkColor = Theme.Muted,
-            Location = new Point(235, 315),
-            AutoSize = true,
+            Location = new Point(260, 150),
+            Size = new Size(120, 30),
         };
-        exitButton.LinkClicked += (_, _) => Close();
+        exitButton.Click += (_, _) => Close();
 
         AcceptButton = startButton;
-        Controls.AddRange(new Control[] { titleLabel, rulesLabel, nameLabel, _nameTextBox, startButton, exitButton });
+        Controls.AddRange(new Control[] { rulesLabel, nameLabel, _nameTextBox, startButton, exitButton });
         ResumeLayout(false);
     }
 

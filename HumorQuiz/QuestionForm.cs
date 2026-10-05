@@ -29,51 +29,22 @@ public class QuestionForm : Form
         Question question = session.CurrentQuestion;
 
         Text = $"Вопрос {session.QuestionNumber} из {session.TotalQuestions}";
-        ClientSize = new Size(560, 440);
+        ClientSize = new Size(420, 290);
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;
-        BackColor = Theme.Background;
-        Font = Theme.NormalFont;
-
-        var headerLabel = new Label
-        {
-            Text = $"Вопрос {session.QuestionNumber} из {session.TotalQuestions}",
-            Font = Theme.HeaderFont,
-            ForeColor = Theme.Accent,
-            Location = new Point(20, 15),
-            AutoSize = true,
-        };
-
-        var progressBar = new ProgressBar
-        {
-            Location = new Point(20, 50),
-            Size = new Size(520, 12),
-            Maximum = session.TotalQuestions,
-            Value = session.QuestionNumber - 1,
-        };
 
         var jokeLabel = new Label
         {
             Text = previousJoke is null ? "" : "Верно! " + previousJoke,
-            ForeColor = Theme.Success,
-            Font = Theme.SmallFont,
-            Location = new Point(20, 70),
-            Size = new Size(520, 36),
+            Location = new Point(20, 10),
+            Size = new Size(380, 30),
         };
 
         var questionLabel = new Label
         {
             Text = question.Text,
-            Font = Theme.QuestionFont,
-            ForeColor = Theme.Text,
-            Location = new Point(20, 110),
-            Size = new Size(520, 60),
-        };
-
-        var answersPanel = new Panel
-        {
-            Location = new Point(20, 175),
-            Size = new Size(520, 180),
+            Location = new Point(20, 45),
+            Size = new Size(380, 40),
         };
 
         int[] order = Enumerable.Range(0, question.Answers.Length)
@@ -87,31 +58,30 @@ public class QuestionForm : Form
             {
                 Text = question.Answers[answerIndex],
                 Tag = answerIndex,
-                ForeColor = Theme.Text,
-                Location = new Point(10, 5 + i * 43),
-                Size = new Size(500, 38),
-                Cursor = Cursors.Hand,
+                Location = new Point(20, 90 + i * 30),
+                Size = new Size(380, 25),
             };
             _answerButtons.Add(radio);
-            answersPanel.Controls.Add(radio);
+            Controls.Add(radio);
         }
 
         _mistakesLabel = new Label
         {
-            ForeColor = Theme.Muted,
-            Location = new Point(20, 385),
+            Location = new Point(20, 245),
             AutoSize = true,
         };
         UpdateMistakesLabel();
 
-        var answerButton = Theme.CreateButton("Ответить", new Point(390, 370), new Size(150, 45));
+        var answerButton = new Button
+        {
+            Text = "Ответить",
+            Location = new Point(300, 240),
+            Size = new Size(100, 30),
+        };
         answerButton.Click += (_, _) => CheckAnswer();
         AcceptButton = answerButton;
 
-        Controls.AddRange(new Control[]
-        {
-            headerLabel, progressBar, jokeLabel, questionLabel, answersPanel, _mistakesLabel, answerButton,
-        });
+        Controls.AddRange(new Control[] { jokeLabel, questionLabel, _mistakesLabel, answerButton });
 
         FormClosing += OnFormClosing;
         ResumeLayout(false);
