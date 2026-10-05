@@ -8,7 +8,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>HumorQuiz</RootNamespace>
     <AssemblyName>HumorQuiz</AssemblyName>
-    <!-- Позволяет собирать проект и не на Windows (запускать — только на Windows) -->
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 

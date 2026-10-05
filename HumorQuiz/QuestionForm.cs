@@ -1,9 +1,5 @@
 namespace HumorQuiz;
 
-/// <summary>
-/// Окно 2: один вопрос с вариантами ответа.
-/// Для каждого следующего вопроса открывается новое окно.
-/// </summary>
 public class QuestionForm : Form
 {
     private static readonly string[] WrongMessages =
@@ -21,7 +17,6 @@ public class QuestionForm : Form
     private readonly List<RadioButton> _answerButtons = new();
     private readonly Label _mistakesLabel;
 
-    /// <summary>true, если игрок ответил правильно и окно закрылось для перехода дальше.</summary>
     public bool AnsweredCorrectly { get; private set; }
 
     public QuestionForm(QuizSession session, string? previousJoke)
@@ -81,7 +76,6 @@ public class QuestionForm : Form
             Size = new Size(520, 180),
         };
 
-        // Варианты ответов выводятся в случайном порядке, чтобы не запоминать позицию.
         int[] order = Enumerable.Range(0, question.Answers.Length)
             .OrderBy(_ => Random.Shared.Next())
             .ToArray();
@@ -153,7 +147,6 @@ public class QuestionForm : Form
             MessageBoxButtons.OK,
             MessageBoxIcon.Warning);
 
-        // Сбрасываем выбор — игрок возвращается к вопросу и отвечает снова.
         selected.Checked = false;
     }
 

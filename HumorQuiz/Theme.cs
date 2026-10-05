@@ -1,6 +1,5 @@
 namespace HumorQuiz;
 
-/// <summary>Общие цвета, шрифты и стиль кнопок для всех окон.</summary>
 public static class Theme
 {
     public static readonly Color Background = Color.FromArgb(255, 250, 235);

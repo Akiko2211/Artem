@@ -1,6 +1,5 @@
 namespace HumorQuiz;
 
-/// <summary>Набор из 15 юмористических вопросов.</summary>
 public static class QuestionBank
 {
     public static List<Question> GetQuestions() => new()

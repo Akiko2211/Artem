@@ -1,6 +1,5 @@
 namespace HumorQuiz;
 
-/// <summary>Состояние одной игры: игрок, вопросы, текущий вопрос и ошибки.</summary>
 public class QuizSession
 {
     public string PlayerName { get; }

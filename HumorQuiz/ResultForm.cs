@@ -1,9 +1,7 @@
 namespace HumorQuiz;
 
-/// <summary>Окно 3: итоги викторины.</summary>
 public class ResultForm : Form
 {
-    /// <summary>true, если игрок нажал «Сыграть ещё раз».</summary>
     public bool PlayAgain { get; private set; }
 
     public ResultForm(QuizSession session)

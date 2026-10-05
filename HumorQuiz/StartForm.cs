@@ -1,9 +1,5 @@
 namespace HumorQuiz;
 
-/// <summary>
-/// Окно 1: приветствие и ввод имени.
-/// Также управляет переходами между окнами викторины.
-/// </summary>
 public class StartForm : Form
 {
     private readonly TextBox _nameTextBox;
@@ -95,7 +91,6 @@ public class StartForm : Form
         OpenQuestion(session, previousJoke: null, location: Location);
     }
 
-    /// <summary>Открывает окно с текущим вопросом сессии.</summary>
     private void OpenQuestion(QuizSession session, string? previousJoke, Point location)
     {
         var questionForm = new QuestionForm(session, previousJoke)
@@ -108,7 +103,6 @@ public class StartForm : Form
         {
             if (!questionForm.AnsweredCorrectly)
             {
-                // Игрок сдался и закрыл окно — возвращаемся на старт.
                 ShowStart();
                 return;
             }
@@ -128,7 +122,6 @@ public class StartForm : Form
         questionForm.Show();
     }
 
-    /// <summary>Открывает окно с итогами.</summary>
     private void OpenResult(QuizSession session, Point location)
     {
         var resultForm = new ResultForm(session)
